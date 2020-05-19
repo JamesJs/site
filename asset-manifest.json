@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.85c77e04.chunk.css",
+    "main.js": "/static/js/main.9853fdf8.chunk.js",
+    "main.js.map": "/static/js/main.9853fdf8.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e7d7b66d.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e7d7b66d.js.map",
+    "static/css/2.17e5ed98.chunk.css": "/static/css/2.17e5ed98.chunk.css",
+    "static/js/2.e14a0651.chunk.js": "/static/js/2.e14a0651.chunk.js",
+    "static/js/2.e14a0651.chunk.js.map": "/static/js/2.e14a0651.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.f1b981419c00dcf4acbc8f55a3291d02.js": "/precache-manifest.f1b981419c00dcf4acbc8f55a3291d02.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.17e5ed98.chunk.css.map": "/static/css/2.17e5ed98.chunk.css.map",
+    "static/css/main.85c77e04.chunk.css.map": "/static/css/main.85c77e04.chunk.css.map",
+    "static/js/2.e14a0651.chunk.js.LICENSE.txt": "/static/js/2.e14a0651.chunk.js.LICENSE.txt",
+    "static/media/ambev.png": "/static/media/ambev.ce645d6e.png",
+    "static/media/smart.png": "/static/media/smart.0e5bd4db.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e7d7b66d.js",
+    "static/css/2.17e5ed98.chunk.css",
+    "static/js/2.e14a0651.chunk.js",
+    "static/css/main.85c77e04.chunk.css",
+    "static/js/main.9853fdf8.chunk.js"
+  ]
+}
