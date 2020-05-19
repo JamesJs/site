@@ -1,0 +1,47 @@
+body {
+    flex-direction: column;
+    display: flex;
+    
+    
+
+}
+.inputs{
+    
+    background:linear-gradient(#dbf3fa,transparent);
+    background-color: red;
+
+}
+.color{
+    flex: 1 1 224px;
+    background:linear-gradient(white,transparent);
+    background-color: #dbf3fa;
+}
+.deleteButton{
+    margin-right: 5%;
+}
+.tableDiv{
+    display: flex;
+    flex-direction: column;
+    flex:1 1 300px;
+    
+}
+.tableDiv::before{
+    content: '';
+    background:linear-gradient(#dbf3fa,transparent);
+    background-color: white;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+table, th, td {
+    border:1px solid #dddddd;
+}
+.AddAndCsvButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Table{
+    flex: 1 1 100px;
+}

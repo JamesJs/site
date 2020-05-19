@@ -1,0 +1,8 @@
+.formInicio{
+    margin-top: 2%;
+}
+.buttonsAddandRemove { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

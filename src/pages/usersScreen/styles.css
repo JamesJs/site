@@ -1,0 +1,33 @@
+body {
+    flex-direction: column;
+    display: flex;
+    
+    
+
+}
+.colors{
+    flex: 1 1 200px;
+    background:linear-gradient(white,transparent);
+    background-color: #dbf3fa;
+}
+.tableDiv{
+    display: flex;
+    flex-direction: column;
+    flex:1 1 300px;
+    
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+}
+table, th, td {
+    border:1px solid #dddddd;
+}
+.AddAndCsvButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Table{
+    flex: 1 1 100px;
+}
