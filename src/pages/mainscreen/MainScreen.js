@@ -7,12 +7,12 @@ import ambev from './../../assets/ambev.png'
 function MainScreen() {
   function handlerButtonClick(screen){
     if(screen === "result"){
-      window.open('http://localhost:3000/#Result');
+      window.open('https://jamesjs.github.io/site/#Result');
     }
     if(screen ==='operario'){
       console.log("res");
     }else if(screen ==='maquina'){
-      window.open('http://localhost:3000/#Maquinas');
+      window.open('https://jamesjs.github.io/site/#Maquinas');
     }
   }
   return (

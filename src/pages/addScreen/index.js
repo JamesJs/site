@@ -12,7 +12,7 @@ export default function AddScreen(){
         const data = {name,procedures,field};
         console.log(data);
         console.log(procedures);
-        const response = await fetch("http://52.23.184.13:3333/machines/create",{
+        const response = await fetch("https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/create",{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -21,11 +21,14 @@ export default function AddScreen(){
             body:JSON.stringify(data),
         })
         console.log(await response.json());
+        if(response.status===200){
+            window.close();
+        }
     }
     var cont = useRef(0);
     const [procedures,setProcedures] = useState([{}]);
     const [name,setName] = useState('');
-    const [field,setField] = useState("Meio Ambiente");
+    const [field,setField] = useState("Meio ambiente");
     
     const [quant,setQuant] = useState([cont.current]);
     

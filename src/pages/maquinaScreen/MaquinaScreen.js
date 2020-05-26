@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table'
 import "./styles.css";
 export default function MaquinaScreen(){
     const fetchMachine = async ()=>{
-        const response = await fetch("http://52.23.184.13:3333/machines/index",{
+        const response = await fetch("https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/index",{
         headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -26,13 +26,13 @@ export default function MaquinaScreen(){
         fetchMachine();
     },[])
     function onPressTable(name){
-        window.open('http://localhost:3000/#Info',name,"width=800,height=800");
+        window.open('http://JamesJs.github.io/site//#Info',name,"width=800,height=800");
     }
     function onPressEdit(name){
-        window.open('http://localhost:3000/#edit',name,"width=800,height=800");
+        window.open('http://JamesJs.github.io/site//#edit',name,"width=800,height=800");
     }
     async function onPressDelete(name){
-        var response = await fetch(`http://52.23.184.13:3333/machines/delete?name=${name}`,{
+        var response = await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/delete?name=${name}`,{
         headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -46,8 +46,12 @@ export default function MaquinaScreen(){
         //}
     }
     function onPressAdd(){
-            console.log('enviou');
+        window.open('http://JamesJs.github.io/site//#add',"Adicionar","width=800,height=800");
 
+    }
+    function onPressCsv(){
+       
+        window.open('http://JamesJs.github.io/site//#csv',"Adicionar","width=800,height=800");
     }
     return(
       
@@ -79,7 +83,9 @@ export default function MaquinaScreen(){
                 
                  <div className="Table" >
                  <div className="AddAndCsvButtons">
+                        
                         <Button onClick={onPressAdd} variant="primary" size="sm">+</Button>{' '}
+                        <Button onClick={onPressCsv} variant="primary" size="sm">CSV</Button>{' '}
                         <Button onClick={attTable} variant="primary" size="sm">Atualizar</Button>{' '}
                     </div>
                     <Table hover responsive bordered>

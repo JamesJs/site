@@ -1,3 +1,11 @@
+html,body,#root,.app{
+  height: 100%;
+  max-height: 100%;
+
+  
+}
+
+
 body {
   display: flex;
   flex-direction: column;
@@ -25,7 +33,7 @@ body {
 }
 .buttons{
   
-  flex:  4 1 300px;
+  flex:   1 200px;
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
@@ -42,7 +50,7 @@ body {
 .cima:before{
   content: '';
   height: 5800px;
-  background-color: thistle;
+
 }
 .buttons button{
   font-size: 150%;
@@ -52,12 +60,12 @@ body {
 }
 .footer{
   
-  flex: 1000 1 100px;
-  
+  flex: 1 1 1px;
+  align-self: center;
   display: flex;
-  flex-direction: row;
   align-content: center;
   justify-content: center;
+  align-items:center;
   
 
 }
@@ -65,20 +73,20 @@ body {
   display: flex;
   background:linear-gradient(white,transparent);
   background-color:#dbf3fa;
-  flex-direction: row;
+  flex-direction: column;
   
 }
 .imageAmbev{
-  
-  max-width: 15%;
+
   align-self: center;
 }
 .W5Button{
-  float:left;
   height: 40px;
   align-self: flex-end;
 }
 .W5ButtonDiv{
-  flex:  1 1 10px;
+  flex: 3 1 10px;
+  justify-content: flex-end;
   display: flex;
+
 }

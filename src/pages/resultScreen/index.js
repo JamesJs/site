@@ -4,17 +4,23 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
+import "./styles.css"
 export default function ResultScreen(){
-    const [whys,setWhys] = useState([]);
+
     
+    
+    const [whys,setWhys] = useState([]);
     const [initialDate,setInitialDate] = useState(new Date());
     const [finalDate,setFinalDate] = useState(new Date());
     const [id,setId] = useState('');
     const [searchPress,setSearchPress] = useState(false);
-    const [field,setField] = useState("Meio Ambiente");
+    const [field,setField] = useState("Meio ambiente");
+
+
+
     async function handlerSearchButton(){
         const response = await fetch(
-            `http://52.23.184.13:3333/why/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&id=${id}`
+            `https://cors-anywhere.herokuapp.com/https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/why/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&id=${id}&field=${field}`
             ,{
         headers:{
             'Accept': 'application/json',
@@ -27,8 +33,24 @@ export default function ResultScreen(){
     if(data.length!==0 && response.status === 200){
         setSearchPress(true);
     }
+
     console.log(data);
     setWhys(data);
+    }
+    async function handlerDeleteButton(idDelete){
+        const response = await fetch(
+            `https://cors-anywhere.herokuapp.com/https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/why/delete/${idDelete}`
+            ,{
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method:'DELETE',
+    });
+    const arrayDelele = whys.filter((value)=>value["_id"]!==idDelete);
+    setWhys(arrayDelele);
+    console.log(await response.json());
+    handlerSearchButton();
     }
     return(
         <div>
@@ -85,9 +107,12 @@ export default function ResultScreen(){
                 (
                     <Card key={`${index}`} >
                     <Card.Header>
-                         <Accordion.Toggle eventKey={`${index}`} as={Button} variant="link" >
-                              {value.userId}
-                         </Accordion.Toggle>
+                        <div className="cardHeader">
+                            <Accordion.Toggle eventKey={`${index}`} as={Button} variant="link" >                              
+                                {value.userId}
+                            </Accordion.Toggle>
+                            <Button className="deleteButton" onClick={()=>{handlerDeleteButton(value["_id"])}} variant="danger" size="sm">Excluir</Button>
+                        </div>
                     </Card.Header>
                     <Accordion.Collapse eventKey={`${index}`}>
                         <Card.Body>   

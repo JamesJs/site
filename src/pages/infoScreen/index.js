@@ -10,7 +10,8 @@ export default function InfoScreen(){
         useEffect(()=>{
             const fetchMachine = async ()=>{
                 console.log(window.name);
-                const response = await fetch(`http://52.23.184.13:3333/machines/find?name=${name}`,{
+                const response =
+                await fetch(`https://cors-anywhere.herokuapp.com/https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/find?name=${window.name}`,{
                 headers:{
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
