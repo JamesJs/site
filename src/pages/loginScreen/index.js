@@ -19,7 +19,7 @@ function LoginScreen() {
     
     const data = {userId,password,field};
     console.log(JSON.stringify(data))
-    const response = await fetch(`http://52.23.184.13:3333/session/login`,{
+    const response = await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/session/login`,{
     
     headers:{     
       'Accept': 'application/json',
@@ -32,15 +32,16 @@ function LoginScreen() {
     });
     console.log(await response.json());
     if(response.status === 200){
-      const cookieObject = cookieObj(document.cookie);
-      console.log(cookieObject);
-      if(cookieObject[1]["admin"]=="true"){
+      //const cookieObject = cookieObj(document.cookie);
+      //console.log(cookieObject);
+      //if(cookieObject[1]["admin"]=="true"){
         sessionStorage.setItem('admin',"true");
         history.replace('/mainScreen');
+        console.log(response.headers);
 
-      }else{
+     // }else{
         //colocar algo para mostrar q o usuário não possui authenticação 
-      }
+      //}
     }else{
       //colocar algo para mostrar que o usuário não existe
     }

@@ -20,7 +20,7 @@ export default function Csv(){
         console.log(file.type);
         setProgresso(progresso+50);
         //fazer uma promessa para setar um valor de tempo para a req
-        const response = await fetch(`http://52.23.184.13:3333/fileupload/?field=${field}`,{
+        const response = await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/fileupload/?field=${field}`,{
             method:"POST",
             
             body:data,

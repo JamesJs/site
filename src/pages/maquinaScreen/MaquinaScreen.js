@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table'
 import "./styles.css";
 export default function MaquinaScreen(){
     const fetchMachine = async ()=>{
-        const response = await fetch("http://52.23.184.13:3333/machines/index",{
+        const response = await fetch("https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/index",{
         headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ export default function MaquinaScreen(){
         window.open('http://JamesJs.github.io/site//#edit',name,"width=800,height=800");
     }
     async function onPressDelete(name){
-        var response = await fetch(`http://52.23.184.13:3333/machines/delete?name=${name}`,{
+        var response = await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/delete?name=${name}`,{
         headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json'

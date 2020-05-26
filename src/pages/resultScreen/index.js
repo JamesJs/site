@@ -20,7 +20,7 @@ export default function ResultScreen(){
 
     async function handlerSearchButton(){
         const response = await fetch(
-            `http://52.23.184.13:3333/why/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&id=${id}&field=${field}`
+            `https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/why/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&id=${id}&field=${field}`
             ,{
         headers:{
             'Accept': 'application/json',
@@ -39,7 +39,7 @@ export default function ResultScreen(){
     }
     async function handlerDeleteButton(idDelete){
         const response = await fetch(
-            `http://52.23.184.13:3333/why/delete/${idDelete}`
+            `https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/why/delete/${idDelete}`
             ,{
         headers:{
             'Accept': 'application/json',
