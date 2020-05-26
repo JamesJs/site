@@ -19,7 +19,7 @@ function LoginScreen() {
     
     const data = {userId,password,field};
     console.log(JSON.stringify(data))
-    const response = await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/session/login`,{
+    const response = await fetch(`http://52.23.184.13:3333/session/login`,{
     
     headers:{     
       'Accept': 'application/json',

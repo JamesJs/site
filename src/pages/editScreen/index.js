@@ -14,7 +14,7 @@ export default function AddScreen(){
     const [quant,setQuant] = useState([]);
     useEffect(()=>{
         const fetchMachine = async ()=>{
-            const response = await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/find?name=${window.name}`,{
+            const response = await fetch(`http://52.23.184.13:3333/machines/find?name=${window.name}`,{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -43,7 +43,7 @@ export default function AddScreen(){
     },[])
     async function updateMachine(){
         const data = {name,procedures,field};
-        const response = await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/modify?name=${window.name}` ,{
+        const response = await fetch(`http://52.23.184.13:3333/machines/modify?name=${window.name}` ,{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
