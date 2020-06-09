@@ -12,7 +12,7 @@ export default function AddScreen(){
         const data = {name,procedures,field};
         console.log(data);
         console.log(procedures);
-        const response = await fetch("https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/create",{
+        const response = await fetch("http://3.21.162.147:3333/machines/create",{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

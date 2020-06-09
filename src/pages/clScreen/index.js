@@ -1,26 +1,34 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef,useMemo} from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import {AiOutlineCheckCircle,AiOutlineCloseCircle} from 'react-icons/ai'
 import "./styles.css"
-export default function ResultScreen(){
+export default function ClScreen(){
 
     
-    
-    const [whys,setWhys] = useState([]);
+    const field =  useMemo(()=>{
+         function fetchField(){
+             const field =  sessionStorage.getItem('field');
+             console.log(field);
+             return field;
+         }
+         return fetchField();
+    },[])
+    const [checks,setChecks] = useState([]);
     const [initialDate,setInitialDate] = useState(new Date());
     const [finalDate,setFinalDate] = useState(new Date());
     const [id,setId] = useState('');
     const [searchPress,setSearchPress] = useState(false);
-    const [field,setField] = useState("Meio ambiente");
 
 
 
     async function handlerSearchButton(){
         const response = await fetch(
-            `http://3.21.162.147:3333/why/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&id=${id}&field=${field}`
+            `http://3.21.162.147:3333/check/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&id=${id}&field=${field}`
             ,{
         headers:{
             'Accept': 'application/json',
@@ -28,16 +36,17 @@ export default function ResultScreen(){
         },
         method:'GET',
     });
-    const data = await response.json();
-    console.log(data.length)
+    const responseData = await response.json();
+    const data = responseData.map((value)=>{value.date = new Date(value.date); return value})
+    console.log(data)
     if(data.length!==0 && response.status === 200){
         setSearchPress(true);
     }
 
     console.log(data);
-    setWhys(data);
+    setChecks(data);
     }
-    async function handlerDeleteButton(idDelete){
+    /*async function handlerDeleteButton(idDelete){
         const response = await fetch(
             `http://3.21.162.147:3333/why/delete/${idDelete}`
             ,{
@@ -51,7 +60,7 @@ export default function ResultScreen(){
     setWhys(arrayDelele);
     console.log(await response.json());
     handlerSearchButton();
-    }
+    }*/
     return(
         <div>
             <Form>
@@ -80,50 +89,44 @@ export default function ResultScreen(){
 
                         </Form.Control>
                     </InputGroup>
-                    <Form.Group controlId="name">                
-            <Form.Control value={field} onChange={(e)=>{console.log(e.target.value);setField(e.target.value)}} as="select" custom> 
-                <Form.Label >Escolha a área</Form.Label>                          
-                            <option> Meio ambiente </option> 
-                            <option> BBlend </option>
-                            <option> Packaging 501  </option>
-                            <option> Packaging 502 </option>
-                            <option> Packaging 503  </option>
-                            <option> Packaging 511  </option>
-                            <option> Packaging 512  </option>
-                            <option> Packaging 561 </option> 
-                            <option> Packaging 562 </option> 
-                            <option> Processo cerveja </option>
-                            <option> Utilidades </option> 
-                            <option> Xaroparia </option> 
-                </Form.Control>
-            </Form.Group>
+                   
                     
                     <Button onClick={handlerSearchButton} variant="primary">Pesquisar</Button>
                 </Form.Group>
             
             </Form>
             <Accordion defaultActiveKey="00">
-                {searchPress && whys.map((value,index)=>
+                {searchPress && checks.map((value,index)=>
                 (
                     <Card key={`${index}`} >
                     <Card.Header>
                         <div className="cardHeader">
                             <Accordion.Toggle eventKey={`${index}`} as={Button} variant="link" >                              
-                                {value.userId}
+                                Nome da máquina: {value.machineName}<br/>
+                                Data: {value.date.getDate()}/{value.date.getMonth()+1}/{value.date.getFullYear()}
                             </Accordion.Toggle>
-                            <Button className="deleteButton" onClick={()=>{handlerDeleteButton(value["_id"])}} variant="danger" size="sm">Excluir</Button>
+                            {//<Button className="deleteButton" onClick={()=>{/*handlerDeleteButton(value["_id"])}*/}} variant="danger" size="sm">Excluir</Button>
+                            }
                         </div>
                     </Card.Header>
                     <Accordion.Collapse eventKey={`${index}`}>
-                        <Card.Body>   
-                              <p>Descrição da anomalia: {value.descriptionAnomaly}</p>
-                              <p>Correção: {value.corrective}</p>
-                              <p>Ordem de manutenção: {value.maintenanceOrder}</p>
-                              {value.whys.map((value,index)=><p key={`${index}`}>Porque {value.number}: {value.description}</p>)}                              
-                              <p>Causa: {value.cause}</p>
-                              <p>Deterioração: {value.deterioration}</p>
-                              <p>Comentário: {value.comment}</p>
-                              <p>Notas de manutenção: {value.maintenanceNotes}</p>
+                        <Card.Body>
+                            <ListGroup>   
+                              <ListGroup.Item active>Nome da máquina: {value.machineName}</ListGroup.Item>
+                              <ListGroup.Item>Área: {value.field}</ListGroup.Item>
+                              <ListGroup.Item>Id operador: {value.userId}</ListGroup.Item>
+                              <ListGroup.Item>Feedback: {value.report}</ListGroup.Item>
+                            </ListGroup>
+                              {value.procedures.map((value,index)=>(
+                                  
+                                <ListGroup horizontal>
+                                    <ListGroup.Item key={`${index}`}>Item {value.item}: {value.description}</ListGroup.Item>
+                                    <ListGroup.Item>{value.checked ? <AiOutlineCheckCircle color="green" size={20}/>:
+                                    <AiOutlineCloseCircle color="red" size={20}/>
+                                    }</ListGroup.Item>
+                                </ListGroup>
+                                )
+                              )}                              
                         </Card.Body>
                         
                     </Accordion.Collapse>

@@ -17,31 +17,36 @@ function LoginScreen() {
   async function handlerButtonLogin(){
     sessionStorage.removeItem('admin');
     
-    const data = {userId,password,field};
+    const data = {userId,password};
     console.log(JSON.stringify(data))
-    const response = await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/session/login`,{
+    const response = await fetch(`http://3.21.162.147:3333/session/login`,{
     
     headers:{     
       'Accept': 'application/json',
       'Content-Type': 'application/json',
 
     },
+    //credentials:'include',
     body: JSON.stringify(data),
     method:'POST', 
-    credentials: 'include',
     });
-    console.log(await response.json());
+    
     if(response.status === 200){
+      var field = await response.json();
+      field = field.field;
       //const cookieObject = cookieObj(document.cookie);
+      
+      
       //console.log(cookieObject);
       //if(cookieObject[1]["admin"]=="true"){
         sessionStorage.setItem('admin',"true");
+        sessionStorage.setItem('field',field);
         history.replace('/mainScreen');
         console.log(response.headers);
 
      // }else{
         //colocar algo para mostrar q o usuário não possui authenticação 
-      //}
+     // }
     }else{
       //colocar algo para mostrar que o usuário não existe
     }
@@ -65,26 +70,12 @@ function LoginScreen() {
           </InputGroup>
           <InputGroup className="input"size="lg">
             <FormControl
+              type="password"
               value={password}
               placeholder="senha"
               onChange={(e)=>{setPassword(e.target.value)}}
             />
           </InputGroup>
-          <Form.Control className="input" value={field} onChange={(e)=>{console.log(e.target.value);setField(e.target.value)}} as="select"> 
-                                  
-                            <option>Meio ambiente</option> 
-                            <option>BBlend</option>
-                            <option>Packaging 501</option>
-                            <option>Packaging 502</option>
-                            <option>Packaging 503</option>
-                            <option>Packaging 511</option>
-                            <option>Packaging 512</option>
-                            <option>Packaging 561</option> 
-                            <option>Packaging 562</option> 
-                            <option>Processo cerveja</option>
-                            <option>Utilidades</option> 
-                            <option>Xaroparia</option> 
-            </Form.Control>
           <Button className="loginButton "  onClick={handlerButtonLogin} variant="outline-primary" size="lg">Entrar</Button>
         {
            //<Button onClick={()=>{handlerButtonClick('operario')}} variant="outline-primary" size="lg">Cadastro de operadores</Button>

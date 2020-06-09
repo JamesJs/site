@@ -6,7 +6,7 @@ export default function PrivateRoute({children}){
     console.log(auth)
     return(
         <Route
-            render={({location})=>auth == "true" ? children: <Redirect to={{pathname:"/",state:{from:location}}}/>}
+            render={({location})=>auth === "true" ? children: <Redirect to={{pathname:"/",state:{from:location}}}/>}
         />
     )
 }

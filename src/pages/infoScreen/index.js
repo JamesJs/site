@@ -11,7 +11,7 @@ export default function InfoScreen(){
             const fetchMachine = async ()=>{
                 console.log(window.name);
                 const response =
-                await fetch(`https://cors-anywhere.herokuapp.com/http://52.23.184.13:3333/machines/find?name=${window.name}`,{
+                await fetch(`http://3.21.162.147:3333/machines/find?name=${window.name}`,{
                 headers:{
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

@@ -31,15 +31,13 @@ body {
   align-self: center;
   
 }
-.buttons{
-  
-  flex:   1 200px;
+.buttonsMainScreen{
+    
+  flex:  1 1 0;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-direction: column;
   align-content: center;
-  
-
 }
 .cima{
   
@@ -52,7 +50,8 @@ body {
   height: 5800px;
 
 }
-.buttons button{
+.buttonsMainScreen button{
+  margin-top: 2%;
   font-size: 150%;
   padding: 2% 2%;
   min-width: 30%;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter,Route,Switch} from 'react-router-dom';
+import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import MainScreen from './pages/mainscreen/MainScreen'
 import UserScreen from './pages/usersScreen/UserScreen'
 import MaquinaScreen from './pages/maquinaScreen/MaquinaScreen'
@@ -9,10 +9,12 @@ import InfoScreen from './pages/infoScreen'
 import EditScreen from './pages/editScreen'
 import ResultScreen from './pages/resultScreen'
 import LoginScreen from './pages/loginScreen'
+import ClScreen from './pages/clScreen'
 import PrivateRoute from './utils/PrivateRoute'
+
 export default function Routes(){
     return(
-        <HashRouter >
+        <BrowserRouter >
             <Switch >
                 <Route path="/"  exact component={LoginScreen}/>
                 <PrivateRoute path="/mainScreen">
@@ -38,8 +40,11 @@ export default function Routes(){
                 </PrivateRoute>
                 <PrivateRoute  path="/csv">
                     <CsvScreen/>
-                </PrivateRoute>             
+                </PrivateRoute>
+                <PrivateRoute  path="/cl">
+                    <ClScreen/>
+                </PrivateRoute>               
             </Switch>
-        </HashRouter>
+        </BrowserRouter>
     )
 }

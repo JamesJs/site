@@ -7,12 +7,14 @@ import ambev from './../../assets/ambev.png'
 function MainScreen() {
   function handlerButtonClick(screen){
     if(screen === "result"){
-      window.open('https://jamesjs.github.io/site/#Result');
+      window.open('http://3.21.162.147:3333/Result');
     }
     if(screen ==='operario'){
       console.log("res");
     }else if(screen ==='maquina'){
-      window.open('https://jamesjs.github.io/site/#Maquinas');
+      window.open('http://3.21.162.147:3333/Maquinas');
+    }else if(screen === 'cl'){
+      window.open('http://3.21.162.147:3333/Cl');
     }
   }
   return (
@@ -21,11 +23,13 @@ function MainScreen() {
       <img className="image"  src={smart} alt="smartMaitenance"/>
         
       </div>
-      <div className="buttons">
+      <div className="buttonsMainScreen">
          <Button onClick={()=>{handlerButtonClick('maquina')}} variant="outline-primary" size="lg">Cadastro de checks</Button>{' '}
         {
            //<Button onClick={()=>{handlerButtonClick('operario')}} variant="outline-primary" size="lg">Cadastro de operadores</Button>
         } 
+        <Button onClick={()=>{handlerButtonClick('cl')}} variant="outline-primary" size="lg">CL</Button>
+        <Button onClick={()=>{handlerButtonClick('result')}} variant="outline-primary" size="lg">5W</Button>{' '}
       </div>
      
        
@@ -36,9 +40,7 @@ function MainScreen() {
             <img className="imageAmbev"  src={ambev} alt="smartMaitenance"/>
          
           </div>
-      <div className="W5ButtonDiv">
-        <Button className="W5Button" onClick={()=>{handlerButtonClick('result')}} variant="outline-primary" size="sm">5W</Button>{' '}
-      </div>
+     
     </div>
     </body>
   );
