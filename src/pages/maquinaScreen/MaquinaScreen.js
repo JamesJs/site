@@ -6,7 +6,8 @@ import Table from 'react-bootstrap/Table'
 import "./styles.css";
 export default function MaquinaScreen(){
     const fetchMachine = async ()=>{
-        const response = await fetch("http://3.21.162.147:3333/machines/index",{
+        const field = sessionStorage.getItem('field');
+        const response = await fetch(`http://localhost:3333/machines/index?field=${field}`,{
         headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -25,14 +26,20 @@ export default function MaquinaScreen(){
     useEffect(()=>{  
         fetchMachine();
     },[])
-    function onPressTable(name){
+    function onPressTable(name,period,frequency){
         window.open('http://3.21.162.147:3333/Info',name,"width=800,height=800");
+        window.data = {period,frequency};
+       
     }
-    function onPressEdit(name){
-        window.open('http://3.21.162.147:3333/edit',name,"width=800,height=800");
+    function onPressEdit(name,period,frequency){
+        var w = window.open('http://3.21.162.147:3333/edit',name,"width=800,height=800");
+        window.data = {period,frequency};
+        w.data = {period,frequency};
+       
     }
-    async function onPressDelete(name){
-        var response = await fetch(`http://3.21.162.147:3333/machines/delete?name=${name}`,{
+    async function onPressDelete(name,period,frequency){
+        var response = await fetch(`http://3.21.162.147:3333/machines/delete?name=${name}&period=${period}&frequency=${frequency}`,{
+
         headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -94,18 +101,25 @@ export default function MaquinaScreen(){
                            <th>#</th>
                            <th>Nome</th>
                            <th>Área</th>
+                           <th>Período</th>
+                           <th>Turnos</th>
+                           
                            <th>Opções</th>
                         </tr>
                     </thead>
                     <tbody>
                     {machines.filter((value)=>search ? (value.name.indexOf(search)===0) : true).map((valor,indice)=>(
                         <tr key={indice}>
-                        <td onClick={()=>onPressTable(valor.name)} >{indice}</td>
-                        <td onClick={()=>onPressTable(valor.name)}>{valor.name}</td>
-                        <td onClick={()=>onPressTable(valor.name)}>{valor.field}</td>
+                        <td onClick={()=>onPressTable(valor.name,valor.period,valor.frequency)} >{indice}</td>
+                        <td onClick={()=>onPressTable(valor.name,valor.period,valor.frequency)}>{valor.name}</td>
+                        <td onClick={()=>onPressTable(valor.name,valor.period,valor.frequency)}>{valor.field}</td>
+                        <td onClick={()=>onPressTable(valor.name,valor.period,valor.frequency)}>{valor.period}</td>
+                        <td onClick={()=>onPressTable(valor.name,valor.period,valor.frequency)}>{valor.frequency}</td>
+                        
+
                         <td>
-                            <Button className="deleteButton" onClick={()=>{onPressDelete(valor.name)}} variant="danger" size="sm">Excluir</Button>
-                            <Button onClick={()=>{onPressEdit(valor.name)}} variant="info" size="sm">Editar</Button>
+                            <Button className="deleteButton" onClick={()=>{onPressDelete(valor.name,valor.period,valor.frequency)}} variant="danger" size="sm">Excluir</Button>
+                            <Button onClick={()=>{onPressEdit(valor.name,valor.period,valor.frequency)}} variant="info" size="sm">Editar</Button>
                         </td>
                     </tr> 
                     )

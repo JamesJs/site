@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import './styles.css';
-import {useHistory} from 'react-router-dom';
+import {useHistory,Link} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import smart from './../../assets/smart.png'
@@ -19,7 +19,7 @@ function LoginScreen() {
     
     const data = {userId,password};
     console.log(JSON.stringify(data))
-    const response = await fetch(`http://3.21.162.147:3333/session/login`,{
+    const response = await fetch(`http://localhost:3333/session/login`,{
     
     headers:{     
       'Accept': 'application/json',
@@ -32,16 +32,25 @@ function LoginScreen() {
     });
     
     if(response.status === 200){
-      var field = await response.json();
-      field = field.field;
+      var responseJson = await response.json();
+      const field = responseJson.field;
+      const isAdm = responseJson.admin;
+
       //const cookieObject = cookieObj(document.cookie);
       
       
       //console.log(cookieObject);
       //if(cookieObject[1]["admin"]=="true"){
-        sessionStorage.setItem('admin',"true");
-        sessionStorage.setItem('field',field);
-        history.replace('/mainScreen');
+        await sessionStorage.setItem('admin',`${isAdm}`);
+        await sessionStorage.setItem('field',field);
+        sessionStorage.setItem('userId',userId);
+        console.log(isAdm)
+        if(isAdm){
+          history.replace('/mainScreen');
+        }else{
+          window.location.href = 'http://3.21.162.147:3333/mobileweb';
+          
+        }
         console.log(response.headers);
 
      // }else{
@@ -77,6 +86,7 @@ function LoginScreen() {
             />
           </InputGroup>
           <Button className="loginButton "  onClick={handlerButtonLogin} variant="outline-primary" size="lg">Entrar</Button>
+          <Link to="/register">Cadastre-se</Link>
         {
            //<Button onClick={()=>{handlerButtonClick('operario')}} variant="outline-primary" size="lg">Cadastro de operadores</Button>
         } 

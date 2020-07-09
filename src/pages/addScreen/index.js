@@ -9,7 +9,7 @@ import './styles.css'
 export default function AddScreen(){
     async function addMachine(){
         
-        const data = {name,procedures,field};
+        const data = {name,procedures,field,frequency,period};
         console.log(data);
         console.log(procedures);
         const response = await fetch("http://3.21.162.147:3333/machines/create",{
@@ -27,6 +27,8 @@ export default function AddScreen(){
     }
     var cont = useRef(0);
     const [procedures,setProcedures] = useState([{}]);
+    const [period,setPeriod] = useState('diário');
+    const [frequency,setFrequency] = useState();
     const [name,setName] = useState('');
     const [field,setField] = useState("Meio ambiente");
     
@@ -60,20 +62,34 @@ export default function AddScreen(){
                 <Form.Control onChange={(e)=>{setName(e.target.value)}} type="text" placeholder="Nome"/>
             </Form.Group>
             <Form.Group controlId="name">                
+            <Form.Control value={period} onChange={(e)=>{console.log(e.target.value);setPeriod(e.target.value)}} as="select" custom> 
+                <Form.Label >Escolha o período</Form.Label>                          
+                            <option>diário</option> 
+                            <option>semanal</option>
+                            <option>quinzenal</option>
+                            <option>mensal</option>
+                            
+                </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="name">
+                <Form.Label>Digite a quantidade de turnos</Form.Label>
+                <Form.Control value={frequency} onChange={(e)=>{setFrequency(e.target.value)}} type="text" placeholder="Nome"/>
+            </Form.Group>
+            <Form.Group controlId="name">                
             <Form.Control value={field} onChange={(e)=>{console.log(e.target.value);setField(e.target.value)}} as="select" custom> 
                 <Form.Label >Escolha a área</Form.Label>                          
-                            <option> Meio ambiente </option> 
-                            <option> BBlend </option>
-                            <option> Packaging 501  </option>
-                            <option> Packaging 502 </option>
-                            <option> Packaging 503  </option>
-                            <option> Packaging 511  </option>
-                            <option> Packaging 512  </option>
-                            <option> Packaging 561 </option> 
-                            <option> Packaging 562 </option> 
-                            <option> Processo cerveja  </option>
-                            <option> Utilidades </option> 
-                            <option> Xaroparia </option> 
+                            <option>Meio ambiente</option> 
+                            <option>BBlend</option>
+                            <option>Packaging 501</option>
+                            <option>Packaging 502</option>
+                            <option>Packaging 503</option>
+                            <option>Packaging 511</option>
+                            <option>Packaging 512</option>
+                            <option>Packaging 561</option> 
+                            <option>Packaging 562</option> 
+                            <option>Processo cerveja</option>
+                            <option>Utilidades</option> 
+                            <option>Xaroparia</option> 
                 </Form.Control>
             </Form.Group>
             <p>Use os botões para adicionar ou remover procedimentos</p>

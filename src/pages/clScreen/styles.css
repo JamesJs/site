@@ -1,0 +1,11 @@
+.buttonsStatistic{
+    justify-content: space-between;
+    display: flex;
+}
+.cardHeader{
+    display:flex;
+    justify-content: space-between;
+}
+.deleteButton{
+    align-self: center;
+}

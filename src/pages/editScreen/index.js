@@ -6,15 +6,20 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import './styles.css'
 
-export default function AddScreen(){
+export default function EditScreen(){
     var cont = useRef(0);
     const [name,setName] = useState(window.name);
+    const [date,setDate] = useState();
+    const [period,setPeriod] = useState();
+    const [frequency,setFrequency] = useState();
     const [procedures,setProcedures] = useState([{}]);
     const [field,setField] = useState(''); 
     const [quant,setQuant] = useState([]);
     useEffect(()=>{
         const fetchMachine = async ()=>{
-            const response = await fetch(`http://3.21.162.147:3333/machines/find?name=${window.name}`,{
+            const dataWindow = window.opener.data;
+            console.log(dataWindow)
+            const response = await fetch(`http://3.21.162.147:3333/machines/find?name=${window.name}&period=${dataWindow.period}&frequency=${dataWindow.frequency}`,{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -22,16 +27,23 @@ export default function AddScreen(){
             method:'GET',
         })
             if(response.status===200){
+                 
                  var array = [];
                  const data = await response.json();
+                 console.log(data);
                  console.log(data.procedures.length);
                  cont.current = (data.procedures.length-1);
                  setProcedures(data.procedures);
                  for(var i =0;i<=cont.current;i++){
                     array[i] = i;
                  }
+                 var date = new Date(data.date);
+
                  setQuant(array);
                  setField(data.field);
+                 setPeriod(data.period);
+                 setFrequency(data.frequency);
+                 setDate(`${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`);
             }
             
             
@@ -42,8 +54,8 @@ export default function AddScreen(){
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     async function updateMachine(){
-        const data = {name,procedures,field};
-        const response = await fetch(`http://3.21.162.147:3333/machines/modify?name=${window.name}` ,{
+        const data = {name,procedures,field,frequency,period,date};
+        const response = await fetch(`http://3.21.162.147:3333/machines/modify?name=${window.name}&period=${window.opener.data.period}&frequency=${window.opener.data.frequency}` ,{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -86,9 +98,43 @@ export default function AddScreen(){
                 <Form.Label>Digite o nome da máquina</Form.Label>
                 <Form.Control value={name} onChange={(e)=>{setName(e.target.value)}} type="text" placeholder="Nome"/>
             </Form.Group>
+            <Form.Group controlId="name">                
+            <Form.Control value={period} onChange={(e)=>{console.log(e.target.value);setPeriod(e.target.value)}} as="select" custom> 
+                <Form.Label >Escolha o período</Form.Label>                          
+                            <option>diário</option> 
+                            <option>semanal</option>
+                            <option>quinzenal</option>
+                            <option>mensal</option>
+                            
+                </Form.Control>
+            </Form.Group>
             <Form.Group controlId="name">
-                <Form.Label>Digite o grupo da máquina</Form.Label>
-                <Form.Control value={field}  onChange={(e)=>{setField(e.target.value)}} type="text" placeholder="Área"/>
+                <Form.Label>Digite a quantidade de turnos</Form.Label>
+                <Form.Control value={frequency} onChange={(e)=>{setFrequency(e.target.value)}} type="text" placeholder="Nome"/>
+            </Form.Group>
+            <Form.Group controlId="name">
+                        <Form.Label>Defina a data de início</Form.Label>
+                        <Form.Control value={date} onChange={(e)=>setDate(e.target.value)} type="date">
+
+                        </Form.Control>
+                </Form.Group> 
+            <Form.Group controlId="name">   
+                <Form.Label >Escolha a área</Form.Label>              
+                <Form.Control value={field} onChange={(e)=>{console.log(e.target.value);setField(e.target.value)}} as="select" custom> 
+                                         
+                            <option> Meio ambiente </option> 
+                            <option> BBlend </option>
+                            <option> Packaging 501  </option>
+                            <option> Packaging 502 </option>
+                            <option> Packaging 503  </option>
+                            <option> Packaging 511  </option>
+                            <option> Packaging 512  </option>
+                            <option> Packaging 561 </option> 
+                            <option> Packaging 562 </option> 
+                            <option> Processo cerveja  </option>
+                            <option> Utilidades </option> 
+                            <option> Xaroparia </option> 
+                </Form.Control>
             </Form.Group>
             <p>Use os botões para adicionar ou remover procedimentos</p>
             <div className="buttonsAddandRemove">
