@@ -27,7 +27,7 @@ export default withRouter (function ClScreen({history}){
     const [searchPress,setSearchPress] = useState(false);
     async function handlerDeleteButton(idDelete){
         const response = await fetch(
-            `http://3.21.162.147:3333/check/delete/${idDelete}`
+            `http://54.158.219.128:3333/check/delete/${idDelete}`
             ,{
         headers:{
             'Accept': 'application/json',
@@ -44,7 +44,7 @@ export default withRouter (function ClScreen({history}){
 
     async function handlerSearchButton(){
         const response = await fetch(
-            `http://3.21.162.147:3333/check/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&name=${nome}&field=${field}`
+            `http://54.158.219.128:3333/check/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&name=${nome}&field=${field}`
             ,{
         headers:{
             'Accept': 'application/json',
@@ -67,7 +67,7 @@ export default withRouter (function ClScreen({history}){
     }
     /*async function handlerDeleteButton(idDelete){
         const response = await fetch(
-            `http://3.21.162.147:3333/why/delete/${idDelete}`
+            `http://54.158.219.128:3333/why/delete/${idDelete}`
             ,{
         headers:{
             'Accept': 'application/json',

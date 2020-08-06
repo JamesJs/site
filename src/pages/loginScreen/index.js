@@ -19,7 +19,7 @@ function LoginScreen() {
     
     const data = {userId,password};
     console.log(JSON.stringify(data))
-    const response = await fetch(`http://localhost:3333/session/login`,{
+    const response = await fetch(`http://54.158.219.128:3333/session/login`,{
     
     headers:{     
       'Accept': 'application/json',
@@ -48,7 +48,7 @@ function LoginScreen() {
         if(isAdm){
           history.replace('/mainScreen');
         }else{
-          window.location.href = 'http://3.21.162.147:3333/mobileweb';
+          window.location.href = 'http://54.158.219.128:80/mobileweb';
           
         }
         console.log(response.headers);

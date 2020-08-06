@@ -8,7 +8,7 @@ export default function OperatorsEditScreen(){
     const [id,setId] = useState(window.data.userId);
     async function updateOperatorHandler(){
         const data = {name,admin:admin ==="Sim" ? true : false,fields:[field],userId:id};
-        const response = await fetch(`http://3.21.162.147:3333/users/update/${window.data["_id"]}` ,{
+        const response = await fetch(`http://54.158.219.128:3333/users/update/${window.data["_id"]}` ,{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -62,6 +62,8 @@ export default function OperatorsEditScreen(){
                             <option>Processo cerveja</option>
                             <option>Utilidades</option> 
                             <option>Xaroparia</option> 
+                            <option>Engenharia</option>
+                            <option>testArea</option>
                 </Form.Control>
             </Form.Group>
             <Button onClick={updateOperatorHandler} variant="primary" size="sm">Alterar</Button>{' '}

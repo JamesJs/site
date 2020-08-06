@@ -16,11 +16,15 @@ export default function ResultScreen(){
     const [searchPress,setSearchPress] = useState(false);
     const [field,setField] = useState("Meio ambiente");
 
-
+    function onPressCsv(){
+       
+        window.open('http://54.158.219.128:80/csv5w',"Adicionar","width=800,height=800");
+    }
 
     async function handlerSearchButton(){
+        
         const response = await fetch(
-            `http://3.21.162.147:3333/why/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&id=${id}&field=${field}`
+            `http://54.158.219.128:3333/why/indexDates?initialDate=${initialDate}&finalDate=${finalDate}&id=${id}&field=${field}`
             ,{
         headers:{
             'Accept': 'application/json',
@@ -39,7 +43,7 @@ export default function ResultScreen(){
     }
     async function handlerDeleteButton(idDelete){
         const response = await fetch(
-            `http://3.21.162.147:3333/why/delete/${idDelete}`
+            `http://54.158.219.128:3333/why/delete/${idDelete}`
             ,{
         headers:{
             'Accept': 'application/json',
@@ -95,10 +99,19 @@ export default function ResultScreen(){
                             <option> Processo cerveja </option>
                             <option> Utilidades </option> 
                             <option> Xaroparia </option> 
+                            <option>Engenharia</option>
+                            <option>testArea</option>
                 </Form.Control>
             </Form.Group>
-                    
-                    <Button onClick={handlerSearchButton} variant="primary">Pesquisar</Button>
+                    <view className="buttonsView">
+                        <Button onClick={handlerSearchButton} variant="primary">Pesquisar</Button>
+                        <Button onClick={onPressCsv} variant="secondary" size="sm">Importar CSV</Button>{' '}
+                        <a href={`http://54.158.219.128:3333/backup?initialDate=${initialDate}&finalDate=${finalDate}&userId=${id}&field=${field}&type=5w`} download>
+                            <Button  variant="secondary">Exportar CSV</Button>
+                            
+                        
+                        </a>
+                    </view>    
                 </Form.Group>
             
             </Form>
@@ -116,6 +129,9 @@ export default function ResultScreen(){
                     </Card.Header>
                     <Accordion.Collapse eventKey={`${index}`}>
                         <Card.Body>   
+                              <p>Turno: {value.shift}</p>
+                              <p>TAG: {value.tag}</p>
+                              <p>Equipamento: {value.equip}</p>
                               <p>Descrição da anomalia: {value.descriptionAnomaly}</p>
                               <p>Correção: {value.corrective}</p>
                               <p>Ordem de manutenção: {value.maintenanceOrder}</p>

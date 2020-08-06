@@ -7,14 +7,14 @@ import ambev from './../../assets/ambev.png'
 function MainScreen() {
   function handlerButtonClick(screen){
     if(screen === "result"){
-      window.open('http://3.21.162.147:3333/Result');
+      window.open('http://54.158.219.128:80/Result');
     }
     if(screen ==='operario'){
-      window.open('http://3.21.162.147:3333/operator');
+      window.open('http://54.158.219.128:80/operator');
     }else if(screen ==='maquina'){
-      window.open('http://localhost:3333/Maquinas');
+      window.open('http://54.158.219.128:80/Maquinas');
     }else if(screen === 'cl'){
-      window.open('http://3.21.162.147:3333/Cl');
+      window.open('http://54.158.219.128:80/Cl');
     }
   }
   return (

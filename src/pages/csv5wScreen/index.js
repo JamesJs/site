@@ -6,12 +6,11 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Form from 'react-bootstrap/Form';
 import './styles.css'
-export default function Csv(){
+export default function Csv5w(){
     const fileSelect = useRef();
     const [progresso,setProgresso] = useState(0);
     const [loading,setLoading] = useState(false);
     const [file,setFile] = useState(0);
-    const [field,setField] = useState("Meio ambiente");
     async function fetchData(){
         setLoading(true);
         setProgresso(30)
@@ -20,7 +19,7 @@ export default function Csv(){
         console.log(file.type);
         setProgresso(progresso+50);
         //fazer uma promessa para setar um valor de tempo para a req
-        const response = await fetch(`http://54.158.219.128:3333/fileupload/?field=${field}`,{
+        const response = await fetch(`http://54.158.219.128:3333/fileupload/5w/`,{
             method:"POST",
             
             body:data,
@@ -88,33 +87,6 @@ export default function Csv(){
             </Form>
         <Form>
         
-      <Form.Group controlId="name">
-        <InputGroup>
-                    <InputGroup.Prepend>
-                           
-                        <Button variant="primary">Área</Button>
-                            
-                    </InputGroup.Prepend>
-            <Form.Control value={field} onChange={(e)=>{console.log(e.target.value);setField(e.target.value)}} as="select" custom> 
-                                  
-                            <option> Meio ambiente </option> 
-                            <option> BBlend </option>
-                            <option> Packaging 501  </option>
-                            <option> Packaging 502 </option>
-                            <option> Packaging 503  </option>
-                            <option> Packaging 511  </option>
-                            <option> Packaging 512  </option>
-                            <option> Packaging 561 </option> 
-                            <option> Packaging 562 </option> 
-                            <option> Processo cerveja  </option>
-                            <option> Utilidades </option> 
-                            <option> Xaroparia </option> 
-                            <option>Engenharia</option>
-                            <option>testArea</option>
-                </Form.Control>
-            
-          </InputGroup>
-        </Form.Group>
         </Form>
         <Button onClick={fetchData}  variant="primary">Importar</Button>
         {loading && <ProgressBar className="barraProgresso" animated label={`${progresso}%`} now={progresso} />}

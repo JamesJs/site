@@ -8,7 +8,7 @@ export default function OperatorScreen(){
     const [operators,setOperators] = useState([])
     const fetchOperators = useCallback(async ()=>{
         const field = sessionStorage.getItem('field');
-        const response = await fetch(`http://3.21.162.147:3333/users/index?field=${field}`,{
+        const response = await fetch(`http://54.158.219.128:3333/users/index?field=${field}`,{
         headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -26,12 +26,12 @@ export default function OperatorScreen(){
         fetchOperators();
     },[fetchOperators])
     function onPressEdit(data){
-        var w = window.open('http://3.21.162.147:3333/operatoredit',"name","width=800,height=500");
+        var w = window.open('http://54.158.219.128:80/operatoredit',"name","width=800,height=500");
         w.data = data;
        
     }
     async function onPressDelete(id){
-        await fetch(`http://3.21.162.147:3333/users/delete/${id}`,{
+        await fetch(`http://54.158.219.128:3333/users/delete/${id}`,{
 
         headers:{
             'Accept': 'application/json',
@@ -44,7 +44,7 @@ export default function OperatorScreen(){
         
     }
     function addHandler(){
-        var w = window.open('http://3.21.162.147:3333/operatoradd',"name","width=800,height=500");
+        var w = window.open('http://54.158.219.128:80/operatoradd',"name","width=800,height=500");
     }
     return(
         <html>

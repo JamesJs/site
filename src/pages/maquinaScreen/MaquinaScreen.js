@@ -4,10 +4,11 @@ import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Table from 'react-bootstrap/Table'
 import "./styles.css";
+const field = sessionStorage.getItem('field');
 export default function MaquinaScreen(){
     const fetchMachine = async ()=>{
-        const field = sessionStorage.getItem('field');
-        const response = await fetch(`http://localhost:3333/machines/index?field=${field}`,{
+        
+        const response = await fetch(`http://54.158.219.128:3333/machines/index?field=${field}`,{
         headers:{
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -27,18 +28,19 @@ export default function MaquinaScreen(){
         fetchMachine();
     },[])
     function onPressTable(name,period,frequency){
-        window.open('http://3.21.162.147:3333/Info',name,"width=800,height=800");
+        window.open('http://54.158.219.128:80/Info',name,"width=800,height=800");
         window.data = {period,frequency};
        
     }
     function onPressEdit(name,period,frequency){
-        var w = window.open('http://3.21.162.147:3333/edit',name,"width=800,height=800");
+        var w = window.open('http://54.158.219.128:80/edit',name,"width=800,height=800");
         window.data = {period,frequency};
         w.data = {period,frequency};
        
     }
+   
     async function onPressDelete(name,period,frequency){
-        var response = await fetch(`http://3.21.162.147:3333/machines/delete?name=${name}&period=${period}&frequency=${frequency}`,{
+        var response = await fetch(`http://54.158.219.128:3333/machines/delete?name=${name}&period=${period}&frequency=${frequency}`,{
 
         headers:{
             'Accept': 'application/json',
@@ -53,12 +55,12 @@ export default function MaquinaScreen(){
         //}
     }
     function onPressAdd(){
-        window.open('http://3.21.162.147:3333/add',"Adicionar","width=800,height=800");
+        window.open('http://54.158.219.128:80/add',"Adicionar","width=800,height=800");
 
     }
     function onPressCsv(){
        
-        window.open('http://3.21.162.147:3333/csv',"Adicionar","width=800,height=800");
+        window.open('http://54.158.219.128:80/csv',"Adicionar","width=800,height=800");
     }
     return(
       
@@ -92,7 +94,7 @@ export default function MaquinaScreen(){
                  <div className="AddAndCsvButtons">
                         
                         <Button onClick={onPressAdd} variant="primary" size="sm">+</Button>{' '}
-                        <Button onClick={onPressCsv} variant="primary" size="sm">CSV</Button>{' '}
+                        <Button onClick={onPressCsv} variant="secondary" size="sm">CSV</Button>{' '}
                         <Button onClick={attTable} variant="primary" size="sm">Atualizar</Button>{' '}
                     </div>
                     <Table hover responsive bordered>
@@ -117,9 +119,14 @@ export default function MaquinaScreen(){
                         <td onClick={()=>onPressTable(valor.name,valor.period,valor.frequency)}>{valor.frequency}</td>
                         
 
-                        <td>
-                            <Button className="deleteButton" onClick={()=>{onPressDelete(valor.name,valor.period,valor.frequency)}} variant="danger" size="sm">Excluir</Button>
-                            <Button onClick={()=>{onPressEdit(valor.name,valor.period,valor.frequency)}} variant="info" size="sm">Editar</Button>
+                        <td className="tableButtons">
+                            
+                                <Button className="deleteButton" onClick={()=>{onPressDelete(valor.name,valor.period,valor.frequency)}} variant="danger" size="sm">Excluir</Button>
+                                <Button onClick={()=>{onPressEdit(valor.name,valor.period,valor.frequency)}} variant="info" size="sm">Editar</Button>
+                                <a href={`http://54.158.219.128:3333/backup?name=${valor.name}&type=checks&field=${field}`} download>
+                                    <Button  variant="secondary" size="sm">Exportar CSV</Button>
+                                </a>
+                            
                         </td>
                     </tr> 
                     )

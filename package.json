@@ -2,7 +2,7 @@
   "name": "smartmaintenance",
   "version": "1.0.0",
   "private": true,
-  "homepage": "http://3.21.162.147:3333/",
+  "homepage": "http://54.158.219.128:3333/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

@@ -15,6 +15,7 @@ import PrivateRoute from './utils/PrivateRoute'
 import RegisterScreen from './pages/registerScreen';
 import OperatorsEditScreen from './pages/operatorsEditScreen'
 import OperatorsAddScreen from './pages/addOperatorScreen';
+import Csv5wScreen from './pages/csv5wScreen'
 export default function Routes(){
     return(
         <BrowserRouter >
@@ -56,7 +57,10 @@ export default function Routes(){
                 </PrivateRoute> 
                 <PrivateRoute  path="/operatoradd">
                     <OperatorsAddScreen/>
-                </PrivateRoute>                  
+                </PrivateRoute>
+                <PrivateRoute  path="/csv5w">
+                    <Csv5wScreen/>
+                </PrivateRoute>                    
             </Switch>
         </BrowserRouter>
     )

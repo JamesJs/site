@@ -1,0 +1,21 @@
+.barraProgresso{
+    display: flex;
+    width: 50%;
+    margin-top: 5%;
+    margin-left: 25%;
+}
+.vlabel{
+    border:1px solid #ced4da
+}
+.vvlabel{
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    vertical-align: middle;
+    margin-left: 1%;
+}
+.vvlabe::after{
+    content: none;
+    
+
+}

@@ -10,6 +10,7 @@ export default function EditScreen(){
     var cont = useRef(0);
     const [name,setName] = useState(window.name);
     const [date,setDate] = useState();
+    const [typeEquip,setTypeEquip] = useState();
     const [period,setPeriod] = useState();
     const [frequency,setFrequency] = useState();
     const [procedures,setProcedures] = useState([{}]);
@@ -19,7 +20,7 @@ export default function EditScreen(){
         const fetchMachine = async ()=>{
             const dataWindow = window.opener.data;
             console.log(dataWindow)
-            const response = await fetch(`http://3.21.162.147:3333/machines/find?name=${window.name}&period=${dataWindow.period}&frequency=${dataWindow.frequency}`,{
+            const response = await fetch(`http://54.158.219.128:3333/machines/find?name=${window.name}&period=${dataWindow.period}&frequency=${dataWindow.frequency}`,{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -44,6 +45,7 @@ export default function EditScreen(){
                  setPeriod(data.period);
                  setFrequency(data.frequency);
                  setDate(`${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`);
+                 setTypeEquip(data.typeEquip);
             }
             
             
@@ -54,8 +56,8 @@ export default function EditScreen(){
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     async function updateMachine(){
-        const data = {name,procedures,field,frequency,period,date};
-        const response = await fetch(`http://3.21.162.147:3333/machines/modify?name=${window.name}&period=${window.opener.data.period}&frequency=${window.opener.data.frequency}` ,{
+        const data = {name,procedures,field,frequency,period,date,typeEquip};
+        const response = await fetch(`http://54.158.219.128:3333/machines/modify?name=${window.name}&period=${window.opener.data.period}&frequency=${window.opener.data.frequency}` ,{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -113,6 +115,10 @@ export default function EditScreen(){
                 <Form.Control value={frequency} onChange={(e)=>{setFrequency(e.target.value)}} type="text" placeholder="Nome"/>
             </Form.Group>
             <Form.Group controlId="name">
+                <Form.Label>Digite o tipo do equipamento</Form.Label>
+                <Form.Control value={typeEquip} onChange={(e)=>{setTypeEquip(e.target.value)}} type="text" placeholder="Tipo de equipamento"/>
+            </Form.Group>
+            <Form.Group controlId="name">
                         <Form.Label>Defina a data de início</Form.Label>
                         <Form.Control value={date} onChange={(e)=>setDate(e.target.value)} type="date">
 
@@ -134,6 +140,8 @@ export default function EditScreen(){
                             <option> Processo cerveja  </option>
                             <option> Utilidades </option> 
                             <option> Xaroparia </option> 
+                            <option>Engenharia</option>
+                            <option>testArea</option>
                 </Form.Control>
             </Form.Group>
             <p>Use os botões para adicionar ou remover procedimentos</p>
@@ -182,9 +190,9 @@ export default function EditScreen(){
                         setProcedures(array);
                     }}  type="text" placeholder="Nome"/>
                 </Form.Group>
-                <Form.Group controlId="name">
+                <Form.Group className='textField' controlId="name">
                     <Form.Label>Digite o metodo da máquina</Form.Label>
-                    <Form.Control value={procedures[index].method} onChange={(event)=>{
+                    <Form.Control as="textarea" value={procedures[index].method} onChange={(event)=>{
                         var array = [];
                         array = [...procedures];
                         array[index].method = event.target.value;

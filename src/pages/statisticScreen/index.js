@@ -56,7 +56,7 @@ export default function StatisticScreen(){
             let sumItens = 0;
             const field = sessionStorage.getItem('field');
             let itensDoneSum=0;
-            const response = await fetch(`http://3.21.162.147:3333/frequency/index?year=${year}&mounth=${mounth}&field=${field}`,{
+            const response = await fetch(`http://54.158.219.128:3333/frequency/index?year=${year}&mounth=${mounth}&field=${field}`,{
                 headers:{
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

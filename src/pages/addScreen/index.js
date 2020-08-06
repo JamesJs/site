@@ -12,7 +12,7 @@ export default function AddScreen(){
         const data = {name,procedures,field,frequency,period};
         console.log(data);
         console.log(procedures);
-        const response = await fetch("http://3.21.162.147:3333/machines/create",{
+        const response = await fetch("http://54.158.219.128:3333/machines/create",{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -90,6 +90,8 @@ export default function AddScreen(){
                             <option>Processo cerveja</option>
                             <option>Utilidades</option> 
                             <option>Xaroparia</option> 
+                            <option>Engenharia</option>
+                            <option>testArea</option>
                 </Form.Control>
             </Form.Group>
             <p>Use os botões para adicionar ou remover procedimentos</p>

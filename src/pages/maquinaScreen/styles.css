@@ -5,6 +5,10 @@ body {
     
 
 }
+.tableButtons{
+    display:flex;
+    justify-content: space-around;
+}
 .inputs{
     
     background:linear-gradient(#dbf3fa,transparent);

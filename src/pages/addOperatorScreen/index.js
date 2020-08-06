@@ -9,7 +9,7 @@ export default function OperatorsAddScreen(){
     const [id,setId] = useState('');
     async function addOperatorHandler(){
         const data = {name,admin:admin ==="Sim" ? true : false,fields:[field],userId:id,password};
-        const response = await fetch(`http://3.21.162.147:3333/users/create` ,{
+        const response = await fetch(`http://54.158.219.128:3333/users/create` ,{
             headers:{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -67,6 +67,8 @@ export default function OperatorsAddScreen(){
                             <option>Processo cerveja</option>
                             <option>Utilidades</option> 
                             <option>Xaroparia</option> 
+                            <option>Engenharia</option>
+                            <option>testArea</option>
                 </Form.Control>
             </Form.Group>
             <Button onClick={addOperatorHandler} variant="primary" size="sm">Adicionar</Button>{' '}
